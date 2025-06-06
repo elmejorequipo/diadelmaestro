@@ -30,9 +30,9 @@
 </head>
 <body>
     <!-- ✅ LA SOLUCIÓN DEFINITIVA ESTÁ AQUÍ ✅ -->
-    <!-- Usamos una etiqueta de audio nativa, NO un iframe -->
+    <!-- Reemplazamos el enlace roto por uno que sí permite su uso -->
     <audio id="background-music" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/10/18/audio_1523b1318a.mp3" type="audio/mpeg">
+        <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
     </audio>
 
     <div id="fireworks-container"></div>
@@ -59,19 +59,15 @@
         const choicesContainer = document.getElementById("choices-container"); 
         const teacherTribute = document.getElementById("teacher-tribute"); 
         const fireworksContainer = document.getElementById("fireworks-container");
-        const music = document.getElementById('background-music'); // Captura el elemento de audio nativo
+        const music = document.getElementById('background-music');
         
         const teacherName = "Jimena Melgar";
         
         const storyData={start:{title:"💙 Para la Profe Jime 💙",text:()=>`Hola, Profe Jimena! Con mucho cariño, hemos preparado esta pequeña historia solo para ti, para celebrar a la maravillosa maestra que eres.<br><br>Que comience la aventura...`,choices:[{text:"Continuar ✨",nextScene:"part1"}]},part1:{title:"El Milagro del Tiempo ⏳",text:()=>`Un día más termina. En tu escritorio, una montaña de cariño en forma de tareas espera tu atención. Pero tu corazón de <strong>"maestra miel"</strong> ve más allá del papel y nota a una pequeña alumna, Anita, con una nube gris sobre su cabeza.<br><br>Parece imposible estar en todas partes, pero es el desafío diario de alguien que entrega su alma.`,choices:[{text:"Acercarte a Anita, el mundo puede esperar.",nextScene:"part2"}]},part2:{title:"La Magia de un Corazón Atento ✨",text:()=>`Tu sola presencia es un imán. Anita se acerca, atraída por esa calidez única.<br><br>"Profe Jime," dice con sus ojos llenos de admiración, "ayer la vi preparando todo, hoy nos explica con una paciencia infinita... y aún así tiene tiempo para sonreír. ¿Cómo lo hace? <strong>¡Parece que usted hace magia con las horas!</strong>"<br><br>Su pregunta no es sobre la clase. Es sobre el milagro que ella ve en ti cada día.`,choices:[{text:"Responderle con una sonrisa...",nextScene:"final"}]},final:{title:"El Verdadero Secreto ⭐",text:()=>`Sonríes, y tu mirada le dice todo. "El único truco, Anita, es hacer todo con un poquito de amor".<br><br>Ella te entrega un dibujo. No es un mago con sombrero. Eres tú, <strong>Profe Jimena</strong>, sosteniendo una estrella brillante. Debajo, se lee: "Para nuestra maestra de las estrellas".<br><br>Y en ese instante, todo sacrificio, cada minuto extra, cobra sentido. Tu magia no es un truco, es la prueba de tu inmenso corazón.`,choices:[{text:"UN MENSAJE MUY ESPECIAL PARA TI",nextScene:"tribute"}]},tribute:{title:"💙💙💙",text:()=>"",action:"showTribute"}};
 
         function initializeExperience() {
-            // ✅ ESTA LÍNEA ES LA CLAVE DE TODO ✅
-            // Al hacer clic, le damos play al audio. El navegador lo permitirá.
             music.play();
-
             startScreen.classList.add("fade-out");
-            
             storyContainer.style.display = 'block';
             renderScene('start');
         }

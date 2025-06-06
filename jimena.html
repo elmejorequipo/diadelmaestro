@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Un Regalo para la Profe Jimena 💙</title>
     <meta name="description" content="Una historia interactiva y un homenaje sorpresa para celebrar a una maestra de corazón: Jimena Melgar.">
-    <meta property="og:title" content="Una Sorpresa para la Profe Jimena ✨">
+    <meta property="og:title" content="Una Sorpresa para la Profe Jime ✨">
     <meta property="og:description" content="Una historia mágica creada con mucho cariño para celebrar a una maestra que hace milagros.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://i.ibb.co/L5T1bdy/card-maestro-preview.png">
@@ -15,7 +15,6 @@
         
         :root{--primary-blue:#6a8dff;--light-blue:#a0c4ff;--accent-silver:#f0f2f5;--text-color:#333745;--card-background:#ffffff;--shadow-color:rgba(106, 141, 255, 0.25);--border-radius:25px}html{font-size:16px}body{font-family:'M PLUS Rounded 1c',sans-serif;background:linear-gradient(180deg, var(--light-blue), var(--primary-blue));color:var(--text-color);margin:0;padding:1.5rem 1rem;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;overflow-x:hidden}
         
-        /* Contenedores principales */
         #start-screen, #story-container, #teacher-tribute{background-color:var(--card-background);border-radius:var(--border-radius);box-shadow:0 10px 45px var(--shadow-color);border:4px solid white;max-width:700px;width:100%;padding:2rem 2.5rem;text-align:center;transition:opacity .6s ease, transform .6s ease, display .1s linear .7s}
         #story-container, #teacher-tribute { display: none; }
         
@@ -27,31 +26,32 @@
         .action-button{background-color:var(--primary-blue);color:white;border:none;padding:1rem 1.25rem;border-radius:50px;font-size:clamp(1rem, 3vw, 1.2rem);font-family:'M PLUS Rounded 1c',sans-serif;font-weight:700;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 10px rgba(106, 141, 255, 0.4)}.action-button:hover{background-color:#5a7efc;transform:translateY(-4px) scale(1.02);box-shadow:0 8px 15px rgba(90, 126, 252, 0.5)}
         #teacher-tribute.visible{display:block;animation:fadeInUp .8s ease-out forwards}#teacher-tribute h2{font-size:clamp(1.8rem, 5.5vw, 2.5rem);font-weight:800;color:var(--primary-blue);margin:0 0 1.5rem 0;text-transform:uppercase;letter-spacing:1px}#teacher-tribute p{font-size:clamp(1.1rem, 3.5vw, 1.3rem);line-height:1.8;margin:0}#teacher-tribute strong{color:#5a7efc;font-weight:700}#teacher-tribute i{color:#a0c4ff;font-style:italic;}@keyframes fadeInUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
         #fireworks-container{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}.firework-particle{position:absolute;border-radius:50%;opacity:1;transform:scale(.2);transition:transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1),opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1)}
-        .hidden-player{position:absolute;left:-9999px}
     </style>
 </head>
 <body>
+    <!-- ✅ LA SOLUCIÓN DEFINITIVA ESTÁ AQUÍ ✅ -->
+    <!-- Usamos una etiqueta de audio nativa, NO un iframe -->
+    <audio id="background-music" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/18/audio_1523b1318a.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="fireworks-container"></div>
     
-    <!-- PANTALLA INICIAL PARA ACTIVAR MÚSICA -->
     <div id="start-screen">
         <h1>Un Regalo para Ti, Profe Jime</h1>
         <h2>Con todo nuestro cariño, hemos preparado una pequeña sorpresa.</h2>
         <button id="start-button" class="action-button">✨ Abrir mi Regalo ✨</button>
     </div>
 
-    <!-- Contenedor de la Historia (inicia oculto) -->
     <div id="story-container">
         <h1></h1>
         <p id="story-text"></p>
         <div id="choices-container"></div>
     </div>
 
-    <!-- Contenedor del Homenaje (inicia oculto) -->
     <div id="teacher-tribute"></div>
 
     <script>
-        // Elementos de la página
         const startScreen = document.getElementById("start-screen");
         const startButton = document.getElementById("start-button");
         const storyContainer = document.getElementById("story-container"); 
@@ -59,29 +59,23 @@
         const choicesContainer = document.getElementById("choices-container"); 
         const teacherTribute = document.getElementById("teacher-tribute"); 
         const fireworksContainer = document.getElementById("fireworks-container");
+        const music = document.getElementById('background-music'); // Captura el elemento de audio nativo
         
         const teacherName = "Jimena Melgar";
         
-        // El resto de la lógica de la historia y fuegos artificiales sigue igual
         const storyData={start:{title:"💙 Para la Profe Jime 💙",text:()=>`Hola, Profe Jimena! Con mucho cariño, hemos preparado esta pequeña historia solo para ti, para celebrar a la maravillosa maestra que eres.<br><br>Que comience la aventura...`,choices:[{text:"Continuar ✨",nextScene:"part1"}]},part1:{title:"El Milagro del Tiempo ⏳",text:()=>`Un día más termina. En tu escritorio, una montaña de cariño en forma de tareas espera tu atención. Pero tu corazón de <strong>"maestra miel"</strong> ve más allá del papel y nota a una pequeña alumna, Anita, con una nube gris sobre su cabeza.<br><br>Parece imposible estar en todas partes, pero es el desafío diario de alguien que entrega su alma.`,choices:[{text:"Acercarte a Anita, el mundo puede esperar.",nextScene:"part2"}]},part2:{title:"La Magia de un Corazón Atento ✨",text:()=>`Tu sola presencia es un imán. Anita se acerca, atraída por esa calidez única.<br><br>"Profe Jime," dice con sus ojos llenos de admiración, "ayer la vi preparando todo, hoy nos explica con una paciencia infinita... y aún así tiene tiempo para sonreír. ¿Cómo lo hace? <strong>¡Parece que usted hace magia con las horas!</strong>"<br><br>Su pregunta no es sobre la clase. Es sobre el milagro que ella ve en ti cada día.`,choices:[{text:"Responderle con una sonrisa...",nextScene:"final"}]},final:{title:"El Verdadero Secreto ⭐",text:()=>`Sonríes, y tu mirada le dice todo. "El único truco, Anita, es hacer todo con un poquito de amor".<br><br>Ella te entrega un dibujo. No es un mago con sombrero. Eres tú, <strong>Profe Jimena</strong>, sosteniendo una estrella brillante. Debajo, se lee: "Para nuestra maestra de las estrellas".<br><br>Y en ese instante, todo sacrificio, cada minuto extra, cobra sentido. Tu magia no es un truco, es la prueba de tu inmenso corazón.`,choices:[{text:"UN MENSAJE MUY ESPECIAL PARA TI",nextScene:"tribute"}]},tribute:{title:"💙💙💙",text:()=>"",action:"showTribute"}};
 
         function initializeExperience() {
-            // Desvanecer la pantalla de inicio
-            startScreen.classList.add("fade-out");
+            // ✅ ESTA LÍNEA ES LA CLAVE DE TODO ✅
+            // Al hacer clic, le damos play al audio. El navegador lo permitirá.
+            music.play();
 
-            // Crear y añadir el reproductor de música. ESTO LA ACTIVA.
-            const musicPlayer = document.createElement('iframe');
-            musicPlayer.classList.add('hidden-player');
-            musicPlayer.src = "https://suno.com/embed/1392dd08-dbef-4207-af6c-f5184e9496e2";
-            musicPlayer.allow = "autoplay"; // Es importante permitir el autoplay
-            document.body.appendChild(musicPlayer);
+            startScreen.classList.add("fade-out");
             
-            // Mostrar el contenedor de la historia e iniciarla
             storyContainer.style.display = 'block';
             renderScene('start');
         }
 
-        // --- MANEJADOR DEL CLIC INICIAL ---
         startButton.onclick = initializeExperience;
 
         function launchFireworks(){const e=['#6a8dff','#a0c4ff','#b3d1ff','#e0e1e9','#ffffff'],t=(t,n)=>{for(let r=0;r<30;r++){const o=document.createElement("div");o.classList.add("firework-particle");const a=360*Math.random(),i=15*Math.random()+5,c=5*Math.random()+2;o.style.width=`${c}px`,o.style.height=`${c}px`,o.style.left=`${t}px`,o.style.top=`${n}px`,o.style.backgroundColor=e[Math.floor(Math.random()*e.length)],fireworksContainer.appendChild(o),requestAnimationFrame(()=>{o.style.transform=`rotate(${3*a}deg) translateX(${i}rem) scale(1)`,o.style.opacity="0"}),setTimeout(()=>{o.remove()},1200)}};const n=setInterval(()=>{const e=.7*window.innerHeight*Math.random(),n=Math.random()*window.innerWidth;t(n,e)},600);setTimeout(()=>clearInterval(n),5e3)}

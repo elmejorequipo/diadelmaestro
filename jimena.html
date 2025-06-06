@@ -1,76 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- ============== CONFIGURACIÓN PARA LA PROFE JIMENA (VERSIÓN AZUL) ============== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Un Regalo para la Profe Jimena 💙</title>
     <meta name="description" content="Una historia interactiva y un homenaje sorpresa para celebrar a una maestra de corazón: Jimena Melgar.">
-    
-    <!-- Meta tags para compartir en WhatsApp -->
     <meta property="og:title" content="Una Sorpresa para la Profe Jime ✨">
     <meta property="og:description" content="Una historia mágica creada con mucho cariño para celebrar a una maestra que hace milagros.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://i.ibb.co/L5T1bdy/card-maestro-preview.png"> <!-- Imagen genérica bonita -->
+    <meta property="og:image" content="https://i.ibb.co/L5T1bdy/card-maestro-preview.png">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap');
         
-        :root {
-            --primary-blue: #6a8dff;
-            --light-blue: #a0c4ff;
-            --accent-silver: #f0f2f5;
-            --text-color: #333745;
-            --card-background: #ffffff;
-            --shadow-color: rgba(106, 141, 255, 0.25);
-            --border-radius: 25px;
-        }
-
-        html{font-size:16px}body{font-family:'M PLUS Rounded 1c',sans-serif;background:linear-gradient(180deg, var(--light-blue), var(--primary-blue));color:var(--text-color);margin:0;padding:1.5rem 1rem;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;overflow-x:hidden}#story-container{background-color:var(--card-background);border-radius:var(--border-radius);box-shadow:0 10px 45px var(--shadow-color);border:4px solid white;max-width:700px;width:100%;padding:2rem 2.5rem;text-align:center;transition:opacity .4s ease-in-out,transform .4s ease,display .1s linear .5s}.fade-out{opacity:0;transform:scale(.95)}h1{color:var(--primary-blue);font-weight:800;font-size:clamp(1.8rem, 5vw, 2.25rem);margin-bottom:1.5rem}#story-text{font-size:clamp(1rem, 3vw, 1.2rem);line-height:1.8;text-align:left;margin-bottom:2rem;font-weight:400}#choices-container{display:flex;flex-direction:column;gap:1rem}.choice-button,.action-button{background-color:var(--primary-blue);color:white;border:none;padding:1rem 1.25rem;border-radius:50px;font-size:clamp(1rem, 3vw, 1.2rem);font-family:'M PLUS Rounded 1c',sans-serif;font-weight:700;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 10px rgba(106, 141, 255, 0.4)}.choice-button:hover,.action-button:hover{background-color:#5a7efc;transform:translateY(-4px) scale(1.02);box-shadow:0 8px 15px rgba(90, 126, 252, 0.5)}#teacher-tribute{opacity:0;transform:translateY(30px);transition:opacity .8s ease-out,transform .8s ease-out;box-sizing:border-box}#teacher-tribute.visible{background:#fff;color:var(--text-color);padding:2rem;border-radius:var(--border-radius);max-width:700px;width:100%;border:5px solid var(--primary-blue);text-align:center;opacity:1;transform:translateY(0);animation:fadeInUp .8s ease-out forwards}#teacher-tribute h2{font-size:clamp(1.8rem, 5.5vw, 2.5rem);font-weight:800;color:var(--primary-blue);margin:0 0 1.5rem 0;text-transform:uppercase;letter-spacing:1px}#teacher-tribute p{font-size:clamp(1.1rem, 3.5vw, 1.3rem);line-height:1.8;margin:0}#teacher-tribute strong{color:#5a7efc;font-weight:700}#teacher-tribute i{color:#a0c4ff;font-style:italic;}@keyframes fadeInUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}#fireworks-container{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}.firework-particle{position:absolute;border-radius:50%;opacity:1;transform:scale(.2);transition:transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1),opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1)}@media (max-width:600px){html{font-size:14px}body{padding:1rem .5rem}#story-container,#teacher-tribute.visible{padding:1.5rem}}.hidden-player{position:absolute;left:-9999px}
+        :root{--primary-blue:#6a8dff;--light-blue:#a0c4ff;--accent-silver:#f0f2f5;--text-color:#333745;--card-background:#ffffff;--shadow-color:rgba(106, 141, 255, 0.25);--border-radius:25px}html{font-size:16px}body{font-family:'M PLUS Rounded 1c',sans-serif;background:linear-gradient(180deg, var(--light-blue), var(--primary-blue));color:var(--text-color);margin:0;padding:1.5rem 1rem;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;overflow-x:hidden}
+        
+        /* Contenedores principales */
+        #start-screen, #story-container, #teacher-tribute{background-color:var(--card-background);border-radius:var(--border-radius);box-shadow:0 10px 45px var(--shadow-color);border:4px solid white;max-width:700px;width:100%;padding:2rem 2.5rem;text-align:center;transition:opacity .6s ease, transform .6s ease, display .1s linear .7s}
+        #story-container, #teacher-tribute { display: none; }
+        
+        .fade-out{opacity:0;transform:scale(.95); display: none !important;}
+        h1{color:var(--primary-blue);font-weight:800;font-size:clamp(1.8rem, 5vw, 2.25rem);margin-bottom:1.5rem}
+        h2{font-size:clamp(1.5rem, 4vw, 2rem); margin-bottom: 2rem;}
+        #story-text{font-size:clamp(1rem, 3vw, 1.2rem);line-height:1.8;text-align:left;margin-bottom:2rem;font-weight:400}
+        #choices-container{display:flex;flex-direction:column;gap:1rem}
+        .action-button{background-color:var(--primary-blue);color:white;border:none;padding:1rem 1.25rem;border-radius:50px;font-size:clamp(1rem, 3vw, 1.2rem);font-family:'M PLUS Rounded 1c',sans-serif;font-weight:700;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 10px rgba(106, 141, 255, 0.4)}.action-button:hover{background-color:#5a7efc;transform:translateY(-4px) scale(1.02);box-shadow:0 8px 15px rgba(90, 126, 252, 0.5)}
+        #teacher-tribute.visible{display:block;animation:fadeInUp .8s ease-out forwards}#teacher-tribute h2{font-size:clamp(1.8rem, 5.5vw, 2.5rem);font-weight:800;color:var(--primary-blue);margin:0 0 1.5rem 0;text-transform:uppercase;letter-spacing:1px}#teacher-tribute p{font-size:clamp(1.1rem, 3.5vw, 1.3rem);line-height:1.8;margin:0}#teacher-tribute strong{color:#5a7efc;font-weight:700}#teacher-tribute i{color:#a0c4ff;font-style:italic;}@keyframes fadeInUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+        #fireworks-container{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}.firework-particle{position:absolute;border-radius:50%;opacity:1;transform:scale(.2);transition:transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1),opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1)}
+        .hidden-player{position:absolute;left:-9999px}
     </style>
 </head>
 <body>
-    <iframe class="hidden-player" src="https://suno.com/embed/1392dd08-dbef-4207-af6c-f5184e9496e2" width="10" height="10"></iframe>
     <div id="fireworks-container"></div>
+    
+    <!-- PANTALLA INICIAL PARA ACTIVAR MÚSICA -->
+    <div id="start-screen">
+        <h1>Un Regalo para Ti, Profe Jime</h1>
+        <h2>Con todo nuestro cariño, hemos preparado una pequeña sorpresa.</h2>
+        <button id="start-button" class="action-button">✨ Abrir mi Regalo ✨</button>
+    </div>
+
+    <!-- Contenedor de la Historia (inicia oculto) -->
     <div id="story-container">
-        <h1>💙 Una Historia para la Profe Jimena 💙</h1>
+        <h1></h1>
         <p id="story-text"></p>
         <div id="choices-container"></div>
     </div>
+
+    <!-- Contenedor del Homenaje (inicia oculto) -->
     <div id="teacher-tribute"></div>
+
     <script>
-        const storyContainer = document.getElementById("story-container"); const storyText = document.getElementById("story-text"); const choicesContainer = document.getElementById("choices-container"); const teacherTribute = document.getElementById("teacher-tribute"); const fireworksContainer = document.getElementById("fireworks-container"); 
+        // Elementos de la página
+        const startScreen = document.getElementById("start-screen");
+        const startButton = document.getElementById("start-button");
+        const storyContainer = document.getElementById("story-container"); 
+        const storyText = document.getElementById("story-text"); 
+        const choicesContainer = document.getElementById("choices-container"); 
+        const teacherTribute = document.getElementById("teacher-tribute"); 
+        const fireworksContainer = document.getElementById("fireworks-container");
+        
         const teacherName = "Jimena Melgar";
         
-        const storyData={start:{title:"💙 Para la Profe Jime 💙",text:()=>"Hola, Profe Jimena! Con mucho cariño, hemos preparado esta pequeña historia solo para ti, para celebrar a la maravillosa maestra que eres.<br><br>Presiona para comenzar esta aventura.",choices:[{text:"Comenzar Aventura ✨",nextScene:"part1"}]},part1:{title:"El Milagro del Tiempo ⏳",text:()=>`Un día más termina. En tu escritorio, una montaña de cariño en forma de tareas espera tu atención. Pero tu corazón de <strong>"maestra miel"</strong> ve más allá del papel y nota a una pequeña alumna, Anita, con una nube gris sobre su cabeza.<br><br>Parece imposible estar en todas partes, pero es el desafío diario de alguien que entrega su alma.`,choices:[{text:"Acercarte a Anita, el mundo puede esperar.",nextScene:"part2"}]},part2:{title:"La Magia de un Corazón Atento ✨",text:()=>`Tu sola presencia es un imán. Anita se acerca, atraída por esa calidez única.<br><br>"Profe Jime," dice con sus ojos llenos de admiración, "ayer la vi preparando todo, hoy nos explica con una paciencia infinita... y aún así tiene tiempo para sonreír. ¿Cómo lo hace? <strong>¡Parece que usted hace magia con las horas!</strong>"<br><br>Su pregunta no es sobre la clase. Es sobre el milagro que ella ve en ti cada día.`,choices:[{text:"Responderle con una sonrisa...",nextScene:"final"}]},final:{title:"El Verdadero Secreto ⭐",text:()=>`Sonríes, y tu mirada le dice todo. "El único truco, Anita, es hacer todo con un poquito de amor".<br><br>Ella te entrega un dibujo. No es un mago con sombrero. Eres tú, <strong>Profe Jimena</strong>, sosteniendo una estrella brillante. Debajo, se lee: "Para nuestra maestra de las estrellas".<br><br>Y en ese instante, todo sacrificio, cada minuto extra, cobra sentido. Tu magia no es un truco, es la prueba de tu inmenso corazón.`,choices:[{text:"UN MENSAJE MUY ESPECIAL PARA TI",nextScene:"tribute"}]},tribute:{title:"💙💙💙",text:()=>"",action:"showTribute"}};
+        // El resto de la lógica de la historia y fuegos artificiales sigue igual
+        const storyData={start:{title:"💙 Para la Profe Jime 💙",text:()=>`Hola, Profe Jimena! Con mucho cariño, hemos preparado esta pequeña historia solo para ti, para celebrar a la maravillosa maestra que eres.<br><br>Que comience la aventura...`,choices:[{text:"Continuar ✨",nextScene:"part1"}]},part1:{title:"El Milagro del Tiempo ⏳",text:()=>`Un día más termina. En tu escritorio, una montaña de cariño en forma de tareas espera tu atención. Pero tu corazón de <strong>"maestra miel"</strong> ve más allá del papel y nota a una pequeña alumna, Anita, con una nube gris sobre su cabeza.<br><br>Parece imposible estar en todas partes, pero es el desafío diario de alguien que entrega su alma.`,choices:[{text:"Acercarte a Anita, el mundo puede esperar.",nextScene:"part2"}]},part2:{title:"La Magia de un Corazón Atento ✨",text:()=>`Tu sola presencia es un imán. Anita se acerca, atraída por esa calidez única.<br><br>"Profe Jime," dice con sus ojos llenos de admiración, "ayer la vi preparando todo, hoy nos explica con una paciencia infinita... y aún así tiene tiempo para sonreír. ¿Cómo lo hace? <strong>¡Parece que usted hace magia con las horas!</strong>"<br><br>Su pregunta no es sobre la clase. Es sobre el milagro que ella ve en ti cada día.`,choices:[{text:"Responderle con una sonrisa...",nextScene:"final"}]},final:{title:"El Verdadero Secreto ⭐",text:()=>`Sonríes, y tu mirada le dice todo. "El único truco, Anita, es hacer todo con un poquito de amor".<br><br>Ella te entrega un dibujo. No es un mago con sombrero. Eres tú, <strong>Profe Jimena</strong>, sosteniendo una estrella brillante. Debajo, se lee: "Para nuestra maestra de las estrellas".<br><br>Y en ese instante, todo sacrificio, cada minuto extra, cobra sentido. Tu magia no es un truco, es la prueba de tu inmenso corazón.`,choices:[{text:"UN MENSAJE MUY ESPECIAL PARA TI",nextScene:"tribute"}]},tribute:{title:"💙💙💙",text:()=>"",action:"showTribute"}};
 
-        function launchFireworks(){const e=['#6a8dff', '#a0c4ff', '#b3d1ff', '#e0e1e9', '#ffffff'],t=(t,n)=>{for(let r=0;r<30;r++){const o=document.createElement("div");o.classList.add("firework-particle");const a=360*Math.random(),i=15*Math.random()+5,c=5*Math.random()+2;o.style.width=`${c}px`,o.style.height=`${c}px`,o.style.left=`${t}px`,o.style.top=`${n}px`,o.style.backgroundColor=e[Math.floor(Math.random()*e.length)],fireworksContainer.appendChild(o),requestAnimationFrame(()=>{o.style.transform=`rotate(${3*a}deg) translateX(${i}rem) scale(1)`,o.style.opacity="0"}),setTimeout(()=>{o.remove()},1200)}};const n=setInterval(()=>{const e=.7*window.innerHeight*Math.random(),n=Math.random()*window.innerWidth;t(n,e)},600);setTimeout(()=>clearInterval(n),5e3)}
+        function initializeExperience() {
+            // Desvanecer la pantalla de inicio
+            startScreen.classList.add("fade-out");
 
-        function renderScene(sceneId) { const scene = storyData[sceneId]; storyContainer.classList.add("fade-out"); setTimeout(() => { let currentTitle = storyContainer.querySelector("h1"); if (!currentTitle) { currentTitle = document.createElement("h1"); storyContainer.prepend(currentTitle); } currentTitle.innerHTML = scene.title || "💙 Una Historia para la Profe Jime 💙"; storyText.innerHTML = scene.text(); choicesContainer.innerHTML = ""; if (scene.choices) { scene.choices.forEach(choice => { const button = document.createElement("button"); button.innerHTML = choice.text; button.classList.add("choice-button"); button.onclick = () => renderScene(choice.nextScene); choicesContainer.appendChild(button); }); } 
-
-        if (scene.action === 'showTribute') { storyContainer.style.display = 'none'; 
-        
-        // --- MENSAJE FINAL REESCRITO CON SKINNER Y TONO AZUL ---
-        const tributeContent = `<h2>PARA TI, QUERIDA PROFE JIMENA</h2>
-            <p>
-            Dicen que algunos maestros nos marcan para siempre. Tú eres uno de esos faros de luz, nuestra "maestra miel".
-            <br><br>
-            Admiramos los milagros que haces con tu tiempo y el sacrificio silencioso que hay detrás de cada logro. Como dijo el gran psicólogo B. F. Skinner:
-            <br>
-            <i>"La educación es lo que sobrevive cuando lo que se ha aprendido se ha olvidado".</i>
-            <br><br>
-            Gracias por enseñarnos lo que sobrevive: la confianza, el cariño, la alegría de aprender y el sentirnos importantes. Ese es tu verdadero legado.
-            <br><br>
-            <strong>¡FELIZ DÍA, CON TODO NUESTRO CARIÑO Y ADMIRACIÓN! ✨💙</strong>
-            </p>`;
-        
-        teacherTribute.innerHTML = tributeContent; teacherTribute.classList.add("visible"); launchFireworks(); 
-        } else {
-             storyContainer.classList.remove("fade-out"); 
+            // Crear y añadir el reproductor de música. ESTO LA ACTIVA.
+            const musicPlayer = document.createElement('iframe');
+            musicPlayer.classList.add('hidden-player');
+            musicPlayer.src = "https://suno.com/embed/1392dd08-dbef-4207-af6c-f5184e9496e2";
+            musicPlayer.allow = "autoplay"; // Es importante permitir el autoplay
+            document.body.appendChild(musicPlayer);
+            
+            // Mostrar el contenedor de la historia e iniciarla
+            storyContainer.style.display = 'block';
+            renderScene('start');
         }
-        
-        }, 500); }
-        renderScene('start');
+
+        // --- MANEJADOR DEL CLIC INICIAL ---
+        startButton.onclick = initializeExperience;
+
+        function launchFireworks(){const e=['#6a8dff','#a0c4ff','#b3d1ff','#e0e1e9','#ffffff'],t=(t,n)=>{for(let r=0;r<30;r++){const o=document.createElement("div");o.classList.add("firework-particle");const a=360*Math.random(),i=15*Math.random()+5,c=5*Math.random()+2;o.style.width=`${c}px`,o.style.height=`${c}px`,o.style.left=`${t}px`,o.style.top=`${n}px`,o.style.backgroundColor=e[Math.floor(Math.random()*e.length)],fireworksContainer.appendChild(o),requestAnimationFrame(()=>{o.style.transform=`rotate(${3*a}deg) translateX(${i}rem) scale(1)`,o.style.opacity="0"}),setTimeout(()=>{o.remove()},1200)}};const n=setInterval(()=>{const e=.7*window.innerHeight*Math.random(),n=Math.random()*window.innerWidth;t(n,e)},600);setTimeout(()=>clearInterval(n),5e3)}
+        function renderScene(sceneId){const scene=storyData[sceneId];storyContainer.classList.add("fade-out");setTimeout(()=>{let currentTitle=storyContainer.querySelector("h1");if(!currentTitle){currentTitle=document.createElement("h1");storyContainer.prepend(currentTitle)}currentTitle.innerHTML=scene.title;storyText.innerHTML=scene.text();choicesContainer.innerHTML="";if(scene.choices){scene.choices.forEach(choice=>{const button=document.createElement("button");button.innerHTML=choice.text;button.classList.add("action-button");button.onclick=()=>renderScene(choice.nextScene);choicesContainer.appendChild(button)})}if(scene.action==='showTribute'){storyContainer.style.display='none';const tributeContent=`<h2>PARA TI, QUERIDA PROFE JIMENA</h2><p>Dicen que algunos maestros nos marcan para siempre. Tú eres uno de esos faros de luz, nuestra "maestra miel".<br><br>Admiramos los milagros que haces con tu tiempo y el sacrificio silencioso que hay detrás de cada logro. Como dijo el gran psicólogo B. F. Skinner:<br><i>"La educación es lo que sobrevive cuando lo que se ha aprendido se ha olvidado".</i><br><br>Gracias por enseñarnos lo que sobrevive: la confianza, el cariño, la alegría de aprender y el sentirnos importantes. Ese es tu verdadero legado.<br><br><strong>¡FELIZ DÍA, CON TODO NUESTRO CARIÑO Y ADMIRACIÓN! ✨💙</strong></p>`;teacherTribute.innerHTML=tributeContent;teacherTribute.classList.add("visible");launchFireworks()}else{storyContainer.classList.remove("fade-out")}},500)}
     </script>
 </body>
 </html>

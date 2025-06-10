@@ -1,14 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Toda la sección <head> y <style> es igual, no la he modificado -->
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Misión: El Escape Maestro</title>
-    <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap');body{margin:0;font-family:'Montserrat',sans-serif;background-color:#0c0f1a;color:#f0f0f0;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden;position:relative}.stars{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1}.star{position:absolute;background-color:white;border-radius:50%;animation:twinkle 5s infinite;opacity:0}@keyframes twinkle{0%{opacity:.5}50%{transform:scale(1.2);opacity:1}100%{opacity:.5}}@keyframes glow{from{text-shadow:0 0 10px #ffeb3b,0 0 15px #ffc107}to{text-shadow:0 0 15px #ff9800,0 0 20px #ff5722}}@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.container{position:relative;z-index:10;max-width:650px;width:90%;padding:30px 40px;background-color:rgba(19,25,41,.9);border:2px solid #ff5722;border-radius:15px;box-shadow:0 0 30px rgba(255,87,34,.5);text-align:center;backdrop-filter:blur(5px)}#intro-screen{display:block;transition:opacity .5s ease-out}#intro-screen.hidden{display:none}#intro-screen h2{font-size:24px;color:#fff;margin-bottom:20px}#teacher-name-input{width:80%;padding:12px;border-radius:5px;border:1px solid #ff5722;background:#1f2a40;color:#fff;font-size:16px;margin-bottom:20px}#invitation-content{display:none}#invitation-content.visible{display:block;animation:fadeInUp 1s ease-out forwards}h1{font-family:'Great Vibes',cursive;font-size:3.8rem;color:#ffc107;margin:0 0 10px 0;text-shadow:2px 2px 10px rgba(0,0,0,.5);animation:glow 2s ease-in-out infinite alternate}.greeting{font-size:1.2rem;margin-bottom:25px}.greeting #personalized-name{font-weight:700;color:#fff}.mission-text{font-size:1rem;line-height:1.6;margin-bottom:30px;text-align:left;border-left:3px solid #ff5722;padding:15px;background-color:rgba(0,0,0,.2);border-radius:0 8px 8px 0}.event-details{list-style:none;padding:0;margin:30px 0;text-align:left}.event-details li{padding:12px 0;font-size:1rem;border-bottom:1px dashed rgba(255,87,34,.3)}.event-details li:last-child{border-bottom:none}.event-details strong{color:#ffc107;display:inline-block;width:120px;font-weight:700}.button{display:inline-block;padding:15px 25px;font-size:.9rem;font-weight:700;color:#0c0f1a;background-color:#ffc107;border:none;border-radius:50px;cursor:pointer;text-transform:uppercase;text-decoration:none;transition:all .3s ease;box-shadow:0 4px 15px rgba(255,193,7,.4);margin:8px 5px}.button:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(255,193,7,.6)}.button.disabled{background-color:#555;color:#aaa;cursor:not-allowed;box-shadow:none;transform:none;pointer-events:none}.permission-section{margin-top:30px;padding-top:20px;border-top:1px dashed #ff5722}.permission-intro{font-style:italic;color:#ccc;margin-bottom:15px}footer{margin-top:30px;padding-top:15px;font-size:.9rem;color:#aaa;border-top:1px solid rgba(255,87,34,.2)}#music-toggle{position:absolute;top:15px;right:15px;background:rgba(255,255,255,.1);border:1px solid #ff5722;color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;transition:all .3s;z-index:100}#music-toggle:hover{background:#ff5722;transform:scale(1.1)}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);display:flex;justify-content:center;align-items:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal-overlay.visible{opacity:1;pointer-events:auto}.modal-content{background:rgba(19,25,41,.95);padding:30px;border-radius:10px;border:1px solid #ff5722;width:90%;max-width:500px;max-height:80vh;overflow-y:auto;position:relative}.modal-content h3{margin-top:0;color:#ffc107}#confirmed-list{list-style:decimal;padding-left:20px;color:#f0f0f0}#confirmed-list li{padding:5px 0}.close-modal{position:absolute;top:15px;right:15px;cursor:pointer;font-size:24px;color:#aaa;transition:color .3s}.close-modal:hover{color:#fff}#view-list-link{cursor:pointer;color:#aaa;text-decoration:underline;transition:color .3s}#view-list-link:hover{color:#fff}@media (max-width:768px){.container{padding:20px;width:95%}h1{font-size:2.8rem}.greeting{font-size:1.1rem}.mission-text,.event-details li,.permission-intro{font-size:.9rem}.event-details strong{display:block;width:auto;margin-bottom:5px}.button{padding:12px 20px;font-size:.8rem}}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión: El Escape Maestro</title>
+    <style>
+        /* --- Importación de Fuentes --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap');
+
+        /* --- Estilos Generales y de Fondo --- */
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background-color: #0c0f1a; color: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; position: relative; }
+        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+        .star { position: absolute; background-color: white; border-radius: 50%; animation: twinkle 5s infinite; opacity: 0; }
+        
+        /* --- Animaciones --- */
+        @keyframes twinkle { 0% { opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { opacity: 0.5; } }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffeb3b, 0 0 15px #ffc107; }
+            to { text-shadow: 0 0 15px #ff9800, 0 0 20px #ff5722; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Contenedor Principal --- */
+        .container { position: relative; z-index: 10; max-width: 650px; width: 90%; padding: 30px 40px; background-color: rgba(19, 25, 41, 0.9); border: 2px solid #ff5722; border-radius: 15px; box-shadow: 0 0 30px rgba(255, 87, 34, 0.5); text-align: center; backdrop-filter: blur(5px); }
+        #intro-screen { display: block; transition: opacity 0.5s ease-out; }
+        #intro-screen.hidden { display: none; }
+        #intro-screen h2 { font-size: 24px; color: #fff; margin-bottom: 20px; }
+        #teacher-name-input { width: 80%; padding: 12px; border-radius: 5px; border: 1px solid #ff5722; background: #1f2a40; color: #fff; font-size: 16px; margin-bottom: 20px; }
+
+        #invitation-content { display: none; }
+        #invitation-content.visible { display: block; animation: fadeInUp 1s ease-out forwards; }
+        
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: #ffc107; margin: 0 0 10px 0; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); animation: glow 2s ease-in-out infinite alternate; }
+        .greeting { font-size: 1.2rem; margin-bottom: 25px; }
+        .greeting #personalized-name { font-weight: bold; color: #fff; }
+        .mission-text { font-size: 1rem; line-height: 1.6; margin-bottom: 30px; text-align: left; border-left: 3px solid #ff5722; padding: 15px; background-color: rgba(0,0,0,0.2); border-radius: 0 8px 8px 0; }
+        
+        .event-details { list-style: none; padding: 0; margin: 30px 0; text-align: left; }
+        .event-details li { padding: 12px 0; font-size: 1rem; border-bottom: 1px dashed rgba(255, 87, 34, 0.3); }
+        .event-details li:last-child { border-bottom: none; }
+        .event-details strong { color: #ffc107; display: inline-block; width: 120px; font-weight: bold; }
+        
+        .button { display: inline-block; padding: 15px 25px; font-size: 0.9rem; font-weight: bold; color: #0c0f1a; background-color: #ffc107; border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4); margin: 8px 5px; }
+        .button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6); }
+        .button.disabled { background-color: #555; color: #aaa; cursor: not-allowed; box-shadow: none; transform: none; pointer-events: none; }
+
+        .permission-section { margin-top: 30px; padding-top: 20px; border-top: 1px dashed #ff5722; }
+        .permission-intro { font-style: italic; color: #ccc; margin-bottom: 15px; }
+        
+        footer { margin-top: 30px; padding-top: 15px; font-size: 0.9rem; color: #aaa; border-top: 1px solid rgba(255, 87, 34, 0.2); }
+        
+        #music-toggle { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid #ff5722; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: all 0.3s; z-index: 100; }
+        #music-toggle:hover { background: #ff5722; transform: scale(1.1); }
+        
+        /* Estilos para el Modal de Confirmados */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.8); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+        .modal-overlay.visible { opacity: 1; pointer-events: auto; }
+        .modal-content { background: rgba(19,25,41,.95); padding: 30px; border-radius: 10px; border: 1px solid #ff5722; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .modal-content h3 { margin-top: 0; color: #ffc107; }
+        #confirmed-list { list-style: decimal; padding-left: 20px; color: #f0f0f0; }
+        #confirmed-list li { padding: 5px 0; }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; font-size: 24px; color: #aaa; transition: color .3s; }
+        .close-modal:hover { color: #fff; }
+        #view-list-link { cursor: pointer; color: #aaa; text-decoration: underline; transition: color .3s; }
+        #view-list-link:hover { color: #fff; }
+
+        @media (max-width: 768px) { .container { padding: 20px; width: 95%; } h1 { font-size: 2.8rem; } .greeting { font-size: 1.1rem; } .mission-text, .event-details li, .permission-intro { font-size: 0.9rem; } .event-details strong { display: block; width: auto; margin-bottom: 5px; } .button { padding: 12px 20px; font-size: 0.8rem; } }
+    </style>
 </head>
 <body>
-    <!-- El <body> HTML es el mismo, no ha cambiado -->
+
     <div class="stars" id="star-container"></div>
     <audio id="background-music" loop></audio>
+
     <div class="container">
         <button id="music-toggle">🎶</button>
         <div id="intro-screen">
@@ -17,25 +84,31 @@
             <input type="text" id="teacher-name-input" placeholder="Profesor/a [Nombre y Apellido]">
             <br><a href="#" class="button" id="start-mission-btn">Revelar Misión</a>
         </div>
+
         <div id="invitation-content">
             <h1>El Escape Maestro</h1>
             <p class="greeting">Estimado/a colega <span id="personalized-name"></span>,</p>
             <div class="mission-text">Su misión consiste en una retirada estratégica del frente académico para adentrarse en una noche de celebración y merecido descanso. ¡Te esperamos!</div>
+            
             <ul class="event-details">
                 <li><strong>Cuándo:</strong><span>Sábado, 14 de Junio | 20:00 PM.</span></li>
                 <li><strong>Coordenadas:</strong><span>"La casa de Ronald" (Don Bosco).</span></li>
             </ul>
+            
             <a href="#" class="button" id="rsvp-btn">Confirmar Asistencia</a>
+
             <div class="permission-section">
                 <p class="permission-intro">¿Necesita un salvoconducto? Le preparamos uno oficial.</p>
                 <a href="#" class="button" id="download-permission-btn">Descargar Permiso (PDF)</a>
             </div>
+            
             <footer>
                 <p>Organizado por: La Comisión Social | Colegio Don Bosco Particular</p>
                 <p><a id="view-list-link">Ver Lista de Confirmados</a></p>
             </footer>
         </div>
     </div>
+    
     <div class="modal-overlay" id="list-modal">
         <div class="modal-content">
             <span class="close-modal" id="close-modal-btn">×</span>
@@ -44,13 +117,16 @@
         </div>
     </div>
     
-    <!-- Aquí es donde está la magia. El nuevo SCRIPT. -->
+    <!-- Librería para generar PDFs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Toda la Lógica Interactiva -->
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        //  ↓↓↓ Pega la URL que obtuviste en el paso anterior ↓↓↓
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhRRvIanWiZgIdPzMNZbDH2LesX9xIGZfGKgj2FjOlmaQlOSyXtLxQEhU-0wB1MneRDg/exec';
+        // ========== ¡URL DEFINITIVA INTEGRADA! ==========
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4Z2l-_DsjHvXNntpOSwrdt16lGm3Me6F0QMBuyQrbe_MoFl5XVXRZCQocloyZNkpIlw/exec';
 
+        // --- Obtener todos los elementos del DOM ---
         const startBtn = document.getElementById('start-mission-btn'),
               rsvpBtn = document.getElementById('rsvp-btn'),
               downloadBtn = document.getElementById('download-permission-btn'),
@@ -66,28 +142,28 @@
               confirmedList = document.getElementById('confirmed-list');
         let teacherFullName = "";
 
-        // URL de música estable
         music.src = "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/main/sample-6s.mp3";
         const starContainer = document.getElementById('star-container'); for (let i = 0; i < 150; i++) { let star = document.createElement('div'); star.className = 'star'; star.style.cssText = `width: ${Math.random() * 2 + 1}px; height: ${star.style.width}; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%; animation-delay: ${Math.random() * 5}s; animation-duration: ${Math.random() * 3 + 2}s;`; starContainer.appendChild(star); }
         startBtn.addEventListener('click', function(e) { e.preventDefault(); teacherFullName = nameInput.value.trim() || "Colega Valioso/a"; personalizedName.textContent = teacherFullName; introScreen.style.opacity = '0'; setTimeout(() => { introScreen.classList.add('hidden'); invitationContent.classList.add('visible'); music.play().catch(err => {}); musicToggle.textContent = '🔇'; }, 500); });
         musicToggle.addEventListener('click', function() { if (music.paused) { music.play(); this.textContent = '🔇'; } else { music.pause(); this.textContent = '🎶'; } });
 
-        // VERSIÓN A PRUEBA DE ERRORES para registrar asistencia
+        // --- REGISTRAR ASISTENCIA (Botón de confirmar) ---
         rsvpBtn.addEventListener('click', function(e) {
             e.preventDefault();
             this.textContent = "Registrando...";
             this.classList.add('disabled');
 
-            const formData = new FormData();
-            formData.append('name', teacherFullName);
-
-            // Fetch se simplifica. No esperamos respuesta, solo enviamos.
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify({ name: teacherFullName })
             })
-            .then(() => {
-                 this.textContent = "¡Asistencia Confirmada!";
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    this.textContent = "¡Asistencia Confirmada!";
+                } else {
+                    throw new Error(data.error || 'Error desconocido del servidor.');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -96,7 +172,7 @@
             });
         });
 
-        // VERSIÓN A PRUEBA DE ERRORES para ver la lista
+        // --- VER LISTA DE CONFIRMADOS (Enlace en el footer) ---
         viewListLink.addEventListener('click', function() {
             listModal.classList.add('visible');
             confirmedList.innerHTML = '<p>Cargando lista de agentes...</p>';
@@ -104,7 +180,7 @@
                 .then(res => res.json())
                 .then(names => {
                     confirmedList.innerHTML = '';
-                    if (names.length === 0) {
+                    if (!names || names.length === 0) {
                         confirmedList.innerHTML = '<p>Aún nadie ha confirmado. ¡Sé el primero!</p>';
                     } else {
                         names.forEach(name => {
@@ -120,9 +196,12 @@
                 });
         });
 
+        // --- Lógica para cerrar el Modal ---
         closeModalBtn.addEventListener('click', () => listModal.classList.remove('visible'));
         listModal.addEventListener('click', (e) => { if (e.target === listModal) { listModal.classList.remove('visible'); } });
-        downloadBtn.addEventListener("click",function(a){a.preventDefault();const{jsPDF:b}=window.jspdf,c=new b,d=`Por medio de la presente, y con el debido respeto, nos dirigimos a usted con una solicitud de permiso de carácter irrevocable.\n\nEl Colegio Don Bosco, consciente de la incansable labor que su esposo/a, el/la Profesor/a ${teacherFullName}, entrega día a día, ha organizado "El Escape Maestro".\n\nEste encuentro tendrá lugar el sábado 14 de junio, a partir de las 20:00 PM, en "La casa de Ronald" (Don Bosco). Es una velada de liberación y jolgorio.\n\nPor lo tanto, solicitamos su valiosa autorización para que pueda unirse a esta travesía de regocijo.\n\nAgradecemos su comprensión y colaboración en esta misión de bienestar docente.`,e="Atentamente,\n\n\nLa Comisión Social\nColegio Don Bosco Particular";c.setFont("helvetica","bold"),c.setFontSize(14),c.text("Solicitud de Permiso Docente",c.internal.pageSize.getWidth()/2,20,{align:"center"}),c.setFont("times","normal"),c.setFontSize(12);const f=c.splitTextToSize(d,180);c.text(f,15,35);const g=c.getTextDimensions(f).h,h=35+g+15;c.text(e,15,h),c.save(`Permiso_Escape_Maestro_${teacherFullName.replace(/\s/g,"_")}.pdf`)});
+        
+        // --- Lógica para Descargar el Permiso en PDF ---
+        downloadBtn.addEventListener("click",function(a){a.preventDefault();const{jsPDF:b}=window.jspdf,c=new b,d=`Por medio de la presente, y con el debido respeto, nos dirigimos a usted con una solicitud de permiso de carácter irrevocable.\n\nEl Colegio Don Bosco, consciente de la incansable labor que su esposo/a, el/la Profesor/a ${teacherFullName}, entrega día a día, ha organizado "El Escape Maestro".\n\nEste encuentro tendrá lugar el sábado 14 de junio, a partir de las 20:00 PM, en "La casa de Ronald" (Don Bosco). Será una velada de liberación y jolgorio.\n\nPor lo tanto, solicitamos su valiosa autorización para que pueda unirse a esta travesía de regocijo.\n\nAgradecemos su comprensión y colaboración en esta misión de bienestar docente.`,e="Atentamente,\n\n\nLa Comisión Social\nColegio Don Bosco Particular";c.setFont("helvetica","bold"),c.setFontSize(14),c.text("Solicitud de Permiso Docente",c.internal.pageSize.getWidth()/2,20,{align:"center"}),c.setFont("times","normal"),c.setFontSize(12);const f=c.splitTextToSize(d,180);c.text(f,15,35);const g=c.getTextDimensions(f).h,h=35+g+15;c.text(e,15,h),c.save(`Permiso_Escape_Maestro_${teacherFullName.replace(/\s/g,"_")}.pdf`)});
     });
     </script>
 </body>

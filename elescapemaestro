@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión: El Escape Maestro</title>
+    <style>
+        /* --- Importación de Fuentes --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap');
+
+        /* --- Estilos Generales --- */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0c0f1a;
+            color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Fondo Estrellado Animado --- */
+        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .star { position: absolute; background-color: white; border-radius: 50%; animation: twinkle 5s infinite; opacity: 0; }
+        @keyframes twinkle {
+            0% { transform: scale(0.5); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.5); opacity: 0.5; }
+        }
+
+        /* --- Contenedor Principal --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 650px;
+            width: 90%;
+            padding: 40px;
+            background-color: rgba(19, 25, 41, 0.9);
+            border: 2px solid #ff5722; /* Tono más anaranjado para parrilla/fuego */
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 87, 34, 0.5);
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- Sección de Introducción (Personalización) --- */
+        #intro-screen { display: block; transition: opacity 0.5s ease-out; }
+        #intro-screen.hidden { display: none; }
+        #intro-screen h2 { font-size: 24px; color: #fff; margin-bottom: 20px; }
+        #teacher-name-input { width: 80%; padding: 12px; border-radius: 5px; border: 1px solid #ff5722; background: #1f2a40; color: #fff; font-size: 16px; margin-bottom: 20px; }
+
+        /* --- Sección de la Invitación --- */
+        #invitation-content { display: none; opacity: 0; transition: opacity 1s ease-in; }
+        #invitation-content.visible { display: block; opacity: 1; }
+        
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #ffc107;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffc107; }
+            to { text-shadow: 0 0 20px #ff9800, 0 0 30px #ff5722; }
+        }
+        
+        .greeting { font-size: 1.2rem; margin-bottom: 25px; }
+        .greeting #personalized-name { font-weight: bold; color: #fff; }
+        
+        .mission-text {
+            font-size: 1rem; line-height: 1.6; margin-bottom: 30px; text-align: left;
+            border-left: 3px solid #ff5722; padding-left: 15px; background-color: rgba(0,0,0,0.2);
+            padding-top: 10px; padding-bottom: 10px; border-radius: 0 8px 8px 0;
+        }
+        
+        .event-details { list-style: none; padding: 0; margin: 30px 0; text-align: left; }
+        .event-details li { padding: 12px 0; font-size: 1.1rem; border-bottom: 1px dashed rgba(255, 87, 34, 0.3); }
+        .event-details li:last-child { border-bottom: none; }
+        .event-details strong { color: #ffc107; display: inline-block; width: 120px; }
+        
+        .button {
+            display: inline-block; padding: 15px 30px; font-size: 1rem; font-weight: bold;
+            color: #0c0f1a; background-color: #ffc107; border: none; border-radius: 50px;
+            cursor: pointer; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4); margin: 5px;
+        }
+        .button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6); }
+        .button.disabled { background-color: #555; color: #aaa; cursor: not-allowed; box-shadow: none; transform: none; }
+        
+        /* --- Sección de Permiso --- */
+        .permission-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #ff5722;
+        }
+        .permission-intro { font-style: italic; color: #ccc; margin-bottom: 15px; }
+        
+        footer { margin-top: 40px; font-size: 0.9rem; color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="stars" id="star-container"></div>
+    <div class="container">
+        <!-- Pantalla Inicial -->
+        <div id="intro-screen">
+            <h2>Misión Especial: Día del Maestro</h2>
+            <p>Por favor, identifíquese para recibir su asignación.</p>
+            <input type="text" id="teacher-name-input" placeholder="Profesor/a [Nombre y Apellido]">
+            <br>
+            <a href="#" class="button" id="start-mission-btn">Revelar Misión</a>
+        </div>
+
+        <!-- Contenido de la Invitación -->
+        <div id="invitation-content">
+            <h1>El Escape Maestro</h1>
+            <p class="greeting">Estimado/a colega <span id="personalized-name"></span>,</p>
+            <div class="mission-text">
+                Ha llegado el momento de ejecutar la operación más esperada del año: <strong>El Escape Maestro</strong>. Tu misión consiste en una retirada estratégica del frente de batalla académico para adentrarte en una noche de celebración, camaradería y merecido descanso. ¡Te esperamos para compartir un banquete celestial, brindar con néctares estelares y disfrutar de una noche inolvidable!
+            </div>
+            
+            <ul class="event-details">
+                <li><strong>Objetivo:</strong><span>Liberación y Jolgorio Docente.</span></li>
+                <li><strong>Cuándo:</strong><span>Sábado, 14 de Junio | 20:00 PM.</span></li>
+                <li><strong>Coordenadas:</strong><span>Salón de Eventos "La casa de Ronald" (Don Bosco).</span></li>
+                <li><strong>Provisiones:</strong><span>Carne a la parrilla, bebidas, postres y música.</span></li>
+                <li><strong>Código:</strong><span>Elegante Casual.</span></li>
+            </ul>
+            
+            <a href="#" class="button" id="rsvp-btn">Confirmar Asistencia</a>
+
+            <!-- Nueva Sección para Descargar Permiso -->
+            <div class="permission-section">
+                <p class="permission-intro">¿Necesitas un salvoconducto para esta misión? Te hemos preparado una solicitud de permiso oficial para asegurar el éxito de tu escape.</p>
+                <a href="#" class="button" id="download-permission-btn">Descargar Permiso (PDF)</a>
+            </div>
+            
+            <footer><p>Organizado por: La Comisión Social | Colegio Don Bosco Particular - Nivel Secundario</p></footer>
+        </div>
+    </div>
+
+    <!-- Carga de la biblioteca jsPDF desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- ELEMENTOS DEL DOM ---
+            const startBtn = document.getElementById('start-mission-btn');
+            const rsvpBtn = document.getElementById('rsvp-btn');
+            const downloadBtn = document.getElementById('download-permission-btn');
+            const introScreen = document.getElementById('intro-screen');
+            const invitationContent = document.getElementById('invitation-content');
+            const nameInput = document.getElementById('teacher-name-input');
+            const personalizedName = document.getElementById('personalized-name');
+            let teacherFullName = "";
+
+            // --- GENERAR ESTRELLAS DE FONDO ---
+            const starContainer = document.getElementById('star-container');
+            for (let i = 0; i < 150; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random()*2+1}px`;
+                star.style.height = star.style.width;
+                star.style.top = `${Math.random()*100}%`;
+                star.style.left = `${Math.random()*100}%`;
+                star.style.animationDelay = `${Math.random()*5}s`;
+                star.style.animationDuration = `${Math.random()*3+2}s`;
+                starContainer.appendChild(star);
+            }
+
+            // --- LÓGICA DE INTERACCIÓN ---
+            startBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                teacherFullName = nameInput.value.trim();
+                if (teacherFullName === "") { teacherFullName = "Colega Valioso/a"; }
+                personalizedName.textContent = teacherFullName;
+                introScreen.style.opacity = '0';
+                setTimeout(() => {
+                    introScreen.classList.add('hidden');
+                    invitationContent.classList.add('visible');
+                }, 500);
+            });
+            
+            rsvpBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!this.classList.contains('disabled')) {
+                    this.textContent = "¡Asistencia Confirmada!";
+                    this.classList.add('disabled');
+                }
+            });
+
+            // --- LÓGICA DE GENERACIÓN DE PDF ---
+            downloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // --- TEXTO DE LA CARTA ---
+                const letterTitle = "Solicitud de Permiso Extraordinario para Disfrute Docente";
+                
+                const letterBody = `Por medio de la presente, y con el debido respeto que su elevada posición como pilar fundamental de nuestro distinguido personal docente amerita, nos dirigimos a usted con una solicitud de permiso especial y de carácter irrevocable.
+                
+El Colegio Don Bosco, consciente de la incansable labor y la pasión desmedida que su esposo/a, el/la Profesor/a ${teacherFullName}, entrega día a día a la formación de futuras generaciones, ha organizado un evento de magnitud cósmica: "El Escape Maestro".
+                
+Este encuentro, que tendrá lugar el sábado 14 de junio, a partir de las 20:00 PM, en el Salón de Eventos "La casa de Ronald" (Don Bosco), es un decreto de liberación y jolgorio. Será una velada donde las pizarras se convertirán en pistas de baile, las evaluaciones en risas contagiosas, y la única fórmula por resolver será la de la felicidad pura. Habrá carne a la parrilla digna de un banquete celestial, néctares estelares para brindar, postres que desafían la gravedad y música con ondas gravitacionales de ritmo puro.
+                
+Sabemos que la ausencia, aunque sea por unas horas, de una figura tan brillante como su esposo/a podría generar un vacío en el hogar. Sin embargo, este "escape" no es solo un capricho, es una necesidad pedagógica vital para recargar energías, celebrar los logros y fortalecer el espíritu que tanto aportan a la comunidad educativa.
+                
+Por lo tanto, solicitamos formalmente su valiosa autorización para que el/la Profesor/a ${teacherFullName} pueda unirse a esta travesía de regocijo, prometiendo devolverlo/a en óptimas condiciones, recargado/a de energía, con una sonrisa de oreja a oreja y, muy posiblemente, ¡con algún paso de baile nuevo bajo el brazo!
+
+Agradecemos de antemano su comprensión y colaboración en esta misión de bienestar docente. Su apoyo es, sin duda, una estrella más en el firmamento de nuestros educadores.`;
+                
+                const signature = `Atentamente,\n\nLa Comisión Social\nColegio Don Bosco Particular\nNivel Secundario`;
+                
+                // --- CONSTRUCCIÓN DEL PDF ---
+                // Título
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(14);
+                doc.text(letterTitle, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+                
+                // Cuerpo de la carta (con manejo de saltos de línea)
+                doc.setFont("times", "normal");
+                doc.setFontSize(12);
+                const splitBody = doc.splitTextToSize(letterBody, 180); // 180mm de ancho de texto
+                doc.text(splitBody, 15, 40);
+
+                // Firma (calculando la posición para que quede al final)
+                const bodyHeight = doc.getTextDimensions(splitBody).h;
+                const signatureY = 40 + bodyHeight + 20;
+                doc.text(signature, 15, signatureY);
+
+                // Guardar el archivo
+                const fileName = `Solicitud_Permiso_${teacherFullName.replace(/\s/g, '_')}.pdf`;
+                doc.save(fileName);
+            });
+        });
+    </script>
+</body>
+</html>
